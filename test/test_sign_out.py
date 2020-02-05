@@ -7,7 +7,7 @@ from .test_base import TestBase
 
 class SignOutTest(TestBase):
 
-    def test_sign_out_of_account_is_successful(self):
+    def test_signing_out_of_account_is_successful(self):
         account_home_page = AccountHomePage(self.driver)
         home_page = HomePage(self.driver)
         login_page = LoginPage(self.driver).navigate()
