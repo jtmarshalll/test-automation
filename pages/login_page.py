@@ -10,9 +10,11 @@ class LoginPage(BasePage):
 
     # Login Page Locators
     EMAIL_INPUT = {"by": By.ID, "using": "email"}
+    FORGOT_PASSWORD_LINK = {"by": By.ID, "using": "forgot-password-link"}
     LOGIN_BUTTON = {"by": By.ID, "using": "logIn"}
     LOGIN_ERROR = {"by": By.CLASS_NAME, "using": "login-error-container"}
     PASSWORD_INPUT = {"by": By.ID, "using": "password"}
+    RESET_PASSWORD_FORM = {"by": By.CLASS_NAME, "using": "reset-info"}
 
     def __init__(self, driver):
         self.driver = driver
@@ -36,6 +38,18 @@ class LoginPage(BasePage):
         self.enter_email(email).enter_password(password).click_login()
         return self
 
+    def click_forgot_password_link(self):
+        self.click(self.FORGOT_PASSWORD_LINK)
+        return self
+
+    def assert_reset_password_form_is_displayed(self):
+        assert self.get_element(self.RESET_PASSWORD_FORM).is_displayed()
+        return self
+
     def assert_login_error_msg_is_displayed(self):
         assert self.get_element(self.LOGIN_ERROR).text == self.LOGIN_ERROR_MESSAGE
+        return self
+
+    def assert_login_button_is_disabled(self):
+        assert not self.get_element(self.LOGIN_BUTTON).is_enabled()
         return self
